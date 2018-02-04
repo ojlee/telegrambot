@@ -1,4 +1,4 @@
-
+#-*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -17,18 +17,16 @@ req.encoding = 'utf-8'
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 posts = soup.select('a.list_subject')
-latest_title = posts[2].text # 첫번째 글 자리
+latest_title = posts[2].text.strip() # 첫번째 글 자리
 latest_url = posts[2].get('href')
-second_title = posts[3].text # 두번째 글 자리
-third_title = posts[4].text # 세번째 글 자리
+second_title = posts[3].text.strip() # 두번째 글 자리
+third_title = posts[4].text.strip() # 세번째 글 자리
 
 
 with open(os.path.join(BASE_DIR, 'latest.txt'), 'r+') as f_read:
     before = f_read.readline()
     f_read.close()
     if before != latest_title:
-        print(before)
-        print(latest_title)
         # 같은 경우는 에러 없이 넘기고, 다른 경우에만
         bot.sendMessage(chat_id=chat_id, text='새 글!\n'+ latest_title +
                         '\n링크 :\n' +'https://www.clien.net' + latest_url +
