@@ -8,8 +8,6 @@ import telegram
 bot = telegram.Bot(token='540032183:AAEHc2AJ3oXfKY8Hi8a56XSRQJIYfvPotmI')
 chat_id = bot.getUpdates()[-1].message.chat.id
 
-bot.sendMessage(chat_id = chat_id, text="저는 봇입니다.")
-
 # 파일의 위치
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -30,7 +28,7 @@ with open(os.path.join(BASE_DIR, 'latest.txt'), 'r+') as f_read:
     f_read.close()
     if before != latest_title:
         # 같은 경우는 에러 없이 넘기고, 다른 경우에만
-        bot.sendMessage(chat_id=chat_id, text='새 글!\n'+ latest_title + '\n링크 : ' + latest_url + '\n\n' + second_title + '\n' + third_title
+        bot.sendMessage(chat_id=chat_id, text='새 글!\n'+ latest_title + '\n링크 :\n ' + latest_url + '\n\n' + second_title + '\n' + third_title
                         +'\n목록\nhttps://www.clien.net/service/board/news')
         with open(os.path.join(BASE_DIR, 'latest.txt'), 'w+') as f_write:
             f_write.write(latest_title)
