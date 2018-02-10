@@ -6,7 +6,7 @@ import os
 import telegram
 
 bot = telegram.Bot(token='')
-url = 'https://goo.gl/ZYMoXm'
+url = 'https://goo.gl/DZ46oi'
 
 
 chat_id = bot.getUpdates()[-1].message.chat.id
@@ -20,11 +20,11 @@ req.encoding = 'utf-8'
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 
-cafeNames = soup.select('#elThumbnailResultArea > li > dl > dd.txt_block > span > a')
 titles = soup.select('#elThumbnailResultArea > li > dl > dt > a')
 postsText = soup.select('#elThumbnailResultArea > li > dl > dd.sh_cafe_passage')
+cafeNames = soup.select('#elThumbnailResultArea > li > dl > dd.txt_block > span > a')
 
-if cafeNames[0] == '중고나라':
+if cafeNames[0].text.strip() == '중고나라':
     latest_title = titles[0].text.strip() # 첫번째 글 자리
     latest_url = titles[0].get('href')
     latest_text = postsText[0].text.strip()
